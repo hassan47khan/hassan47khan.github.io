@@ -148,6 +148,8 @@ ul, ol { padding: 0; list-style: none; }
 .project__text p { max-width: 46ch; }
 .project__text p + p { margin-top: 14px; }
 .project__stack { color: var(--muted-on-navy); font-size: var(--step-small); font-weight: 500; }
+.project__status { font-size: var(--step-small); color: var(--muted-on-navy); }
+.badge { display: inline-block; margin-right: 8px; padding: 2px 8px; background: var(--gold); color: var(--navy-0); font-weight: 500; }
 .project__stack a:hover { color: var(--gold); }
 .project__figure { position: relative; }
 .project__figure > img {
