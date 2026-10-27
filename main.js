@@ -38,10 +38,15 @@
     current = i;
   };
 
+  const pin = document.querySelector('.work__pin');
+  const step = () => innerHeight * 0.75;
+
+  /* Pinned only when the whole left column fits the screen; otherwise stack. */
   const setMode = () => {
     root.classList.toggle('pinned', big.matches);
+    if (big.matches && pin.scrollHeight > pin.clientHeight + 1) root.classList.remove('pinned');
     current = -1;
-    if (big.matches) { show(0); onScroll(); }
+    if (root.classList.contains('pinned')) { show(0); onScroll(); }
     else projects.forEach((p) => { p.classList.remove('is-on', 'was-on'); p.removeAttribute('inert'); });
   };
 
@@ -49,7 +54,7 @@
     if (!root.classList.contains('pinned')) return;
     e.preventDefault();
     const i = Number(a.dataset.go);
-    const top = work.getBoundingClientRect().top + scrollY + i * innerHeight + 2;
+    const top = work.getBoundingClientRect().top + scrollY + i * step() + 2;
     scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
   }));
 
@@ -62,7 +67,7 @@
     const vh = innerHeight;
     if (root.classList.contains('pinned')) {
       const r = work.getBoundingClientRect();
-      const i = Math.min(projects.length - 1, Math.max(0, Math.floor((-r.top + vh * 0.35) / vh)));
+      const i = Math.min(projects.length - 1, Math.max(0, Math.floor((-r.top + step() * 0.4) / step())));
       show(i);
     }
     if (reduce) return;
@@ -80,7 +85,9 @@
     if (!ticking) { requestAnimationFrame(() => { onScroll(); ticking = false; }); ticking = true; }
   }, { passive: true });
   big.addEventListener('change', setMode);
+  addEventListener('resize', () => { clearTimeout(setMode.t); setMode.t = setTimeout(setMode, 150); });
   setMode();
+  if (document.fonts) document.fonts.ready.then(setMode);
   onScroll();
 
   /* Trimly: replay a client message and the tool calls the agent makes to answer it. */
@@ -140,14 +147,6 @@
   };
 
   chips.forEach((c, k) => c.addEventListener('click', () => play(k)));
-
-  /* Play the first conversation once the stage is in view. */
-  if ('IntersectionObserver' in window && log) {
-    const once = new IntersectionObserver((e) => {
-      if (e.some((x) => x.isIntersecting)) { play(0); once.disconnect(); }
-    }, { threshold: 0.4 });
-    once.observe(log);
-  }
 
   /* Contact: open an email with the visitor's own words. */
   const form = document.querySelector('.contact__form');
