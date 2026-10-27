@@ -318,7 +318,7 @@ ul, ol { padding: 0; list-style: none; }
 
 /* ---------- Contact: on slate ---------- */
 .contact { background: var(--slate); color: var(--cream); padding: clamp(96px, 16svh, 180px) var(--m) clamp(96px, 16svh, 160px); }
-.contact__form { max-width: 720px; margin: 0 auto; }
+.contact__inner { max-width: 720px; margin: 0 auto; }
 .contact__title { font-size: var(--step-display); color: var(--gold); }
 .contact__prompt { margin-top: 32px; font-size: var(--step-lead); font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; }
 .contact__prompt span { color: var(--gold); }
@@ -344,6 +344,8 @@ ul, ol { padding: 0; list-style: none; }
 .field__go:hover { transform: translateX(3px); }
 .field__go:active { transform: scale(.92); }
 .contact__note { margin-top: 16px; font-size: var(--step-small); }
+.contact__error { margin-top: 12px; padding: 8px 12px; background: var(--navy-0); color: var(--gold); font-size: var(--step-small); font-weight: 500; }
+.contact__error[hidden] { display: none; }
 .contact__rows { margin-top: 64px; display: grid; gap: 6px; }
 .contact__rows div { display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: center; min-height: 44px; }
 .contact__rows dd a { font-weight: 500; }

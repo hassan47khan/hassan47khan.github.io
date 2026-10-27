@@ -20,7 +20,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Imbue:opsz,wght@10..100,400&family=Albert+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="src/style.css">
+<script type="module" src="src/main.ts"></script>
 </head>
 <body>
 <a class="skip" href="#work">Skip to the work</a>
@@ -44,7 +45,7 @@
     <p class="hero__lead" data-rise>CS student at Farmingdale who builds AI agents end to end.</p>
     <p class="hero__meta" data-rise>Open to AI, ML and software engineering internships for 2027. Based in Deer Park, New York.</p>
     <p class="hero__actions" data-rise>
-      <a class="btn" href="mailto:hassan.c.khan@outlook.com?subject=Internship%20conversation">Email me</a>
+      <a class="btn" href="https://www.linkedin.com/in/hassan-khan-03a095386/" data-email="Email me">Email me via LinkedIn</a>
       <a class="textlink" href="#work">See the work</a>
     </p>
   </div>
@@ -236,25 +237,28 @@
   </div>
 </section>
 
-<section class="contact" id="contact" aria-labelledby="contact-title">
-  <form class="contact__form" action="mailto:hassan.c.khan@outlook.com" method="get" enctype="text/plain">
+<section class="contact" id="contact" aria-labelledby="contact-title" data-mail-user="hassan.c.khan" data-mail-host="outlook.com">
+  <div class="contact__inner">
     <h2 class="contact__title" id="contact-title">Say hello</h2>
     <p class="contact__prompt" data-rise><span>Open to 2027 internships.</span> Let's talk about your team.</p>
-    <div class="field" data-rise>
-      <label class="sr" for="msg">Your message to Hassan</label>
-      <input id="msg" name="body" type="text" autocomplete="off" placeholder="Your message" aria-describedby="msg-note">
-      <input type="hidden" name="subject" value="Internship conversation">
-      <button type="submit" class="field__go" aria-label="Write the email">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-      </button>
-    </div>
-    <p class="contact__note" id="msg-note">This opens your email app with your message addressed to me.</p>
+    <!-- Shown by main.ts: without JS there is no address to send to, so the rows below fall back to LinkedIn. -->
+    <form class="contact__form" novalidate hidden>
+      <div class="field" data-rise>
+        <label class="sr" for="msg">Your message to Hassan</label>
+        <input id="msg" name="body" type="text" autocomplete="off" maxlength="1000" required placeholder="Your message" aria-describedby="msg-note msg-error">
+        <button type="submit" class="field__go" aria-label="Write the email">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+      </div>
+      <p class="contact__error" id="msg-error" role="alert" hidden>Write a message first, then press the arrow.</p>
+      <p class="contact__note" id="msg-note">This opens your email app with your message addressed to me.</p>
+    </form>
     <dl class="contact__rows" data-rise-group>
-      <div><dt>Email</dt><dd><a href="mailto:hassan.c.khan@outlook.com">hassan.c.khan@outlook.com</a></dd></div>
+      <div><dt>Email</dt><dd><a href="https://www.linkedin.com/in/hassan-khan-03a095386/" data-email>Email me via LinkedIn</a></dd></div>
       <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/hassan-khan-03a095386/">in/hassan-khan-03a095386</a></dd></div>
       <div><dt>GitHub</dt><dd><a href="https://github.com/hassan47khan">github.com/hassan47khan</a></dd></div>
     </dl>
-  </form>
+  </div>
 </section>
 </main>
 
@@ -262,7 +266,7 @@
   <img class="foot__img" src="assets/long-island.jpg" width="1600" height="800" alt="" loading="lazy">
   <div class="foot__top">
     <p class="foot__links"><a href="#top">Back to top</a></p>
-    <p>Deer Park, Long Island<br><a href="mailto:hassan.c.khan@outlook.com">hassan.c.khan@outlook.com</a></p>
+    <p>Deer Park, Long Island<br><a href="https://www.linkedin.com/in/hassan-khan-03a095386/" data-email>Email me via LinkedIn</a></p>
   </div>
   <p class="foot__name" aria-hidden="true"><span class="wordmark" data-scale="in">Hassan Khan</span></p>
   <p class="credits">© 2026 Hassan Khan. Pictures via Wikimedia Commons:
@@ -272,6 +276,5 @@
     <a href="https://commons.wikimedia.org/wiki/File:Long_Island_Landsat_Mosaic.jpg">Long Island Landsat mosaic</a>, NASA, public domain.</p>
 </footer>
 
-<script src="main.js" defer></script>
 </body>
 </html>
