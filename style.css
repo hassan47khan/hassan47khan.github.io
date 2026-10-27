@@ -237,7 +237,7 @@ ul, ol { padding: 0; list-style: none; }
    Every project's text shares the middle row, so the row is as tall as the longest one
    and nothing can run into the index. If it does not fit the screen, main.js turns the
    pinned mode off and the stacked layout is used instead. */
-.pinned .work { padding: 0; height: calc(100svh + 4 * 75svh); }
+.pinned .work { padding: 0; height: calc(100svh + (var(--projects, 3) - 1) * 75svh); }
 .pinned .work__pin {
   position: sticky; top: 0;
   height: 100svh;

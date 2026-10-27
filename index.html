@@ -111,30 +111,8 @@
       </figure>
     </article>
 
-    <article class="project" data-i="2" aria-labelledby="p-react">
-      <div class="project__text">
-        <h3 id="p-react">A ReAct agent, from scratch</h3>
-        <p>An agent in plain JavaScript with no framework: only the loop of thinking, calling a tool and reading the result, written by hand so I could see how an agent actually reasons.</p>
-        <p class="project__how">Raw tool-calling logic, a tool registry and a stop condition, with every step of its reasoning printed as it runs.</p>
-        <p class="project__stack">JavaScript · LLM tool calling</p>
-      </div>
-      <figure class="project__figure">
-        <img src="assets/punchcard.jpg" width="1600" height="1261" alt="A woman at a Hollerith pantograph punch preparing 1940 US census cards">
-        <div class="ui ui--trace" data-ui>
-          <div class="ui__bar"><span>agent.run()</span><span class="ui__soft">sample trace</span></div>
-<pre><code><b>Question</b>  Is it warmer in Deer Park or Farmingdale?
-<b>Thought</b>   I need both temperatures.
-<b>Action</b>    get_weather("Deer Park, NY")
-<b>Observe</b>   54°F, clear
-<b>Thought</b>   Now Farmingdale.
-<b>Action</b>    get_weather("Farmingdale, NY")
-<b>Observe</b>   55°F, clear
-<b>Answer</b>    Farmingdale, by about one degree.</code></pre>
-        </div>
-      </figure>
-    </article>
 
-    <article class="project" data-i="3" aria-labelledby="p-movies">
+    <article class="project" data-i="2" aria-labelledby="p-movies">
       <div class="project__text">
         <h3 id="p-movies">Movie recommender</h3>
         <p>A REST API that suggests films from what you have already rated, trained with collaborative filtering on the MovieLens dataset.</p>
@@ -157,36 +135,11 @@
       </figure>
     </article>
 
-    <article class="project" data-i="4" aria-labelledby="p-osint">
-      <div class="project__text">
-        <h3 id="p-osint">OSINT investigation</h3>
-        <p>A digital forensics investigation built only from open sources, where every finding is traced back to the place it was found.</p>
-        <p class="project__how">Collecting, verifying and documenting evidence the way an analyst would, so someone else can follow the trail and reach the same answer.</p>
-        <p class="project__stack">OSINT · Digital forensics · Threat analysis</p>
-      </div>
-      <figure class="project__figure">
-        <img src="assets/bertillon.jpg" width="1600" height="819" alt="Alphonse Bertillon's own anthropometric identification card from 1912, with profile and front photographs">
-        <div class="ui ui--case" data-ui>
-          <div class="ui__bar"><span>Evidence log</span><span class="ui__soft">sample</span></div>
-          <table>
-            <thead><tr><th scope="col">Finding</th><th scope="col">Source</th><th scope="col">Status</th></tr></thead>
-            <tbody>
-              <tr><td>Same handle on three sites</td><td>Public profiles</td><td>Verified</td></tr>
-              <tr><td>Photo taken in a car park</td><td>Image metadata</td><td>Verified</td></tr>
-              <tr><td>Location matches a post</td><td>Street imagery</td><td>Likely</td></tr>
-              <tr><td>Second email address</td><td>Breach notice</td><td>Unconfirmed</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </figure>
-    </article>
 
     <ul class="work__index" aria-label="Projects">
       <li><a href="#p-trimly" data-go="0" aria-current="true"><span>Trimly</span><span class="ui__soft">AI agents · SaaS</span></a></li>
       <li><a href="#p-subtrak" data-go="1"><span>SubTrak</span><span class="ui__soft">Mobile · team lead</span></a></li>
-      <li><a href="#p-react" data-go="2"><span>ReAct agent</span><span class="ui__soft">Agents · JS</span></a></li>
-      <li><a href="#p-movies" data-go="3"><span>Movie recommender</span><span class="ui__soft">ML · API</span></a></li>
-      <li><a href="#p-osint" data-go="4"><span>OSINT</span><span class="ui__soft">Security</span></a></li>
+      <li><a href="#p-movies" data-go="2"><span>Movie recommender</span><span class="ui__soft">ML · API</span></a></li>
     </ul>
   </div>
 </section>
@@ -238,7 +191,7 @@
       <p class="group">Languages</p>
       <ul class="rows">
         <li><span>TypeScript</span><span>Trimly</span></li>
-        <li><span>JavaScript</span><span>ReAct agent</span></li>
+        <li><span>JavaScript</span><span>Node.js, React</span></li>
         <li><span>Python</span><span>Recommender, CodePath</span></li>
         <li><span>Java</span><span>JavaFX coursework</span></li>
         <li><span>SQL</span><span>Trimly, recommender</span></li>
@@ -259,7 +212,7 @@
       </ul>
       <p class="group">Security and tools</p>
       <ul class="rows">
-        <li><span>OSINT and digital forensics</span><span>Investigation</span></li>
+        <li><span>Cybersecurity and digital forensics</span></li>
         <li><span>Git, GitHub, CI/CD</span><span>Daily</span></li>
         <li><span>Linux CLI and Claude Code</span><span>Daily</span></li>
       </ul>
@@ -307,9 +260,7 @@
   <p class="credits">© 2026 Hassan Khan. Pictures via Wikimedia Commons:
     <a href="https://commons.wikimedia.org/w/index.php?curid=131249837">WAC telephone switchboard operators</a> by PhotosNormandie, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>;
     <a href="https://commons.wikimedia.org/wiki/File:Pittsboro_Merchant_Business_Ledger_-_DPLA_-_4cbfce8f8f08c14f851ab74af046c082_(page_258).jpg">Pittsboro Merchant Business Ledger</a>, public domain;
-    <a href="https://commons.wikimedia.org/wiki/File:Card_puncher_-_NARA_-_513295.jpg">Woman with a Hollerith pantograph punch</a>, National Archives, public domain;
     <a href="https://commons.wikimedia.org/wiki/File:The_Rialto_Theatre_building_in_Alamosa,_Colorado_LCCN2015632588.tif">The Rialto Theatre, Alamosa</a> by Carol M. Highsmith, public domain;
-    <a href="https://commons.wikimedia.org/wiki/File:Bertillon,_Alphonse,_fiche_anthropom%C3%A9trique_recto-verso.jpg">Bertillon identification card</a> by Jebulon, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>;
     <a href="https://commons.wikimedia.org/wiki/File:Long_Island_Landsat_Mosaic.jpg">Long Island Landsat mosaic</a>, NASA, public domain.</p>
 </footer>
 
