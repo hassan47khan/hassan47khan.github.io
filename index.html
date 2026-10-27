@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hassan Khan · AI and software engineering</title>
+<meta name="description" content="Hassan Khan is a computer science student at Farmingdale State College who builds AI agents end to end. Open to AI, ML and software engineering internships.">
+<meta property="og:title" content="Hassan Khan · AI and software engineering">
+<meta property="og:description" content="CS student at Farmingdale who builds AI agents end to end.">
+<meta property="og:image" content="https://hassan47khan.github.io/assets/og.jpg">
+<meta name="theme-color" content="#2c3620">
+<link rel="icon" href="assets/avatar.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Imbue:opsz,wght@10..100,400&family=Albert+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#work">Skip to the work</a>
+
+<header class="hero" id="top">
+  <figure class="hero__photo">
+    <img src="assets/switchboard.jpg" width="1600" height="1230" alt="Rows of telephone switchboard operators of the Women's Army Corps at their boards, 1940s" fetchpriority="high">
+    <figcaption>Switchboard operators, 1940s: the first agents who answered every call.</figcaption>
+  </figure>
+
+  <nav class="nav" aria-label="Main">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#stack">Stack</a>
+    <a href="https://github.com/hassan47khan">GitHub</a>
+    <a class="btn" href="mailto:hassan.c.khan@outlook.com?subject=Internship%20conversation">Email me</a>
+  </nav>
+
+  <div class="hero__text">
+    <p class="hero__lead" data-rise>CS student at Farmingdale who builds AI agents end to end.</p>
+    <p class="hero__meta" data-rise>Open to AI, ML and software engineering internships for 2027. Based in Deer Park, New York.</p>
+  </div>
+
+  <h1 class="hero__name"><span class="wordmark" data-scale="out">Hassan Khan</span></h1>
+</header>
+
+<main>
+<section class="work" id="work" aria-labelledby="work-title">
+  <div class="work__pin">
+    <div class="work__head">
+      <h2 class="work__title" id="work-title" data-rise>Work</h2>
+    </div>
+
+    <article class="project" data-i="0" aria-labelledby="p-trimly">
+      <div class="project__text">
+        <h3 id="p-trimly">Trimly</h3>
+        <p>A booking concierge for independent salons and barbershops, which I built on my own. Its AI agents answer clients over SMS, WhatsApp, email and voice, at any hour, and book them in.</p>
+        <p class="project__how">Claude tool-use agents with Zod-validated inputs, webhook idempotency guards, Stripe billing and real-time Socket.io streaming, wrapped as a native app with Capacitor. On hold.</p>
+        <p class="project__stack">React 19 · TypeScript · Node.js · PostgreSQL · Claude API</p>
+      </div>
+      <figure class="project__figure">
+        <img src="assets/barbershop.jpg" width="1600" height="1262" alt="Interior of the Natchez Hotel barber shop around 1900: chairs, mirrors and barbers at work">
+        <div class="ui ui--agent" data-ui>
+          <div class="ui__bar">
+            <span>Trimly agent</span>
+            <span class="ui__soft">Replay of a sample conversation</span>
+          </div>
+          <div class="agent__pick" role="group" aria-label="Pick a client message">
+            <button type="button" class="chip" data-scenario="0" aria-pressed="true">Fade on Saturday</button>
+            <button type="button" class="chip" data-scenario="1" aria-pressed="false">Move my booking</button>
+            <button type="button" class="chip" data-scenario="2" aria-pressed="false">Price question</button>
+          </div>
+          <ol class="agent__log" aria-live="polite">
+            <li class="msg msg--in"><span class="msg__via">SMS</span>can i get a skin fade sat around 2?</li>
+            <li class="call"><code>check_availability({ service: "skin_fade", day: "Sat Oct 31", after: "13:30" })</code><span class="call__ok">input valid</span></li>
+            <li class="ret"><code>→ ["2:00 PM · Marcus", "2:45 PM · Dee"]</code></li>
+            <li class="call"><code>hold_slot({ time: "2:00 PM", barber: "Marcus" })</code><span class="call__ok">input valid</span></li>
+            <li class="ret"><code>→ held for 10 minutes</code></li>
+            <li class="msg msg--out">Marcus has 2:00 on Saturday for a skin fade, $35 and about 45 minutes. Reply YES and it's yours.</li>
+          </ol>
+        </div>
+      </figure>
+    </article>
+
+    <article class="project" data-i="1" aria-labelledby="p-subtrak">
+      <div class="project__text">
+        <h3 id="p-subtrak">SubTrak</h3>
+        <p>A mobile app that tracks every subscription you pay for and flags the ones you have stopped using. I am the project manager for our team in Farmingdale's CSC 325 capstone.</p>
+        <p class="project__how">I run sprint planning and the backlog across a Django REST Framework backend, MongoDB and a React Native app. In progress.</p>
+        <p class="project__stack">Django REST Framework · MongoDB · React Native · <a href="https://github.com/hassan47khan/Capstone-Project">Repository</a></p>
+      </div>
+      <figure class="project__figure">
+        <img src="assets/ledger.jpg" width="1066" height="1600" alt="A handwritten page of a merchant's account ledger from Pittsboro, North Carolina, 1830s">
+        <div class="ui ui--subs" data-ui>
+          <div class="ui__bar"><span>This month</span><span class="ui__num">$59.95</span></div>
+          <ul class="subs">
+            <li><span>Spotify Premium</span><span class="ui__soft">Nov 2</span><span class="ui__num">$11.99</span></li>
+            <li class="subs__flag"><span>Hulu</span><span class="ui__soft">Nov 3</span><span class="ui__num">$9.99</span></li>
+            <li><span>Netflix Standard</span><span class="ui__soft">Nov 9</span><span class="ui__num">$17.99</span></li>
+            <li><span>iCloud+ 50 GB</span><span class="ui__soft">Nov 14</span><span class="ui__num">$2.99</span></li>
+            <li><span>Xbox Game Pass</span><span class="ui__soft">Nov 21</span><span class="ui__num">$16.99</span></li>
+          </ul>
+          <p class="subs__note">You haven't opened Hulu in 41 days. Cancel before Nov 3 to keep $9.99 a month.</p>
+        </div>
+      </figure>
+    </article>
+
+    <article class="project" data-i="2" aria-labelledby="p-react">
+      <div class="project__text">
+        <h3 id="p-react">A ReAct agent, from scratch</h3>
+        <p>An agent in plain JavaScript with no framework: only the loop of thinking, calling a tool and reading the result, written by hand so I could see how an agent actually reasons.</p>
+        <p class="project__how">Raw tool-calling logic, a tool registry and a stop condition, with every step of its reasoning printed as it runs.</p>
+        <p class="project__stack">JavaScript · LLM tool calling</p>
+      </div>
+      <figure class="project__figure">
+        <img src="assets/punchcard.jpg" width="1600" height="1261" alt="A woman at a Hollerith pantograph punch preparing 1940 US census cards">
+        <div class="ui ui--trace" data-ui>
+          <div class="ui__bar"><span>agent.run()</span><span class="ui__soft">sample trace</span></div>
+<pre><code><b>Question</b>  Is it warmer in Deer Park or Farmingdale?
+<b>Thought</b>   I need both temperatures.
+<b>Action</b>    get_weather("Deer Park, NY")
+<b>Observe</b>   54°F, clear
+<b>Thought</b>   Now Farmingdale.
+<b>Action</b>    get_weather("Farmingdale, NY")
+<b>Observe</b>   55°F, clear
+<b>Answer</b>    Farmingdale, by about one degree.</code></pre>
+        </div>
+      </figure>
+    </article>
+
+    <article class="project" data-i="3" aria-labelledby="p-movies">
+      <div class="project__text">
+        <h3 id="p-movies">Movie recommender</h3>
+        <p>A REST API that suggests films from what you have already rated, trained with collaborative filtering on the MovieLens dataset.</p>
+        <p class="project__how">I added backend caching and reworked the data pipeline so answers come back quickly under load.</p>
+        <p class="project__stack">Python · SQL · REST · <a href="https://github.com/hassan47khan/Movie-Recommender">Repository</a></p>
+      </div>
+      <figure class="project__figure">
+        <img src="assets/rialto.jpg" width="1600" height="1488" alt="The marquee and front of the Rialto Theatre in Alamosa, Colorado">
+        <div class="ui ui--recs" data-ui>
+          <div class="ui__bar"><span>GET /recommend?user=412</span></div>
+          <p class="recs__why">Because you rated Heat (1995) five stars</p>
+          <ul class="recs">
+            <li><span>Collateral (2004)</span><span class="ui__num">4.6</span></li>
+            <li><span>The Insider (1999)</span><span class="ui__num">4.4</span></li>
+            <li><span>Ronin (1998)</span><span class="ui__num">4.3</span></li>
+            <li><span>L.A. Confidential (1997)</span><span class="ui__num">4.3</span></li>
+          </ul>
+          <p class="ui__soft">Predicted rating out of 5</p>
+        </div>
+      </figure>
+    </article>
+
+    <article class="project" data-i="4" aria-labelledby="p-osint">
+      <div class="project__text">
+        <h3 id="p-osint">OSINT investigation</h3>
+        <p>A digital forensics investigation built only from open sources, where every finding is traced back to the place it was found.</p>
+        <p class="project__how">Collecting, verifying and documenting evidence the way an analyst would, so someone else can follow the trail and reach the same answer.</p>
+        <p class="project__stack">OSINT · Digital forensics · Threat analysis</p>
+      </div>
+      <figure class="project__figure">
+        <img src="assets/bertillon.jpg" width="1600" height="819" alt="Alphonse Bertillon's own anthropometric identification card from 1912, with profile and front photographs">
+        <div class="ui ui--case" data-ui>
+          <div class="ui__bar"><span>Evidence log</span><span class="ui__soft">sample</span></div>
+          <table>
+            <thead><tr><th scope="col">Finding</th><th scope="col">Source</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><td>Same handle on three sites</td><td>Public profiles</td><td>Verified</td></tr>
+              <tr><td>Photo taken in a car park</td><td>Image metadata</td><td>Verified</td></tr>
+              <tr><td>Location matches a post</td><td>Street imagery</td><td>Likely</td></tr>
+              <tr><td>Second email address</td><td>Breach notice</td><td>Unconfirmed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+    </article>
+
+    <ul class="work__index" aria-label="Projects">
+      <li><a href="#p-trimly" data-go="0" aria-current="true"><span>Trimly</span><span class="ui__soft">AI agents · SaaS</span></a></li>
+      <li><a href="#p-subtrak" data-go="1"><span>SubTrak</span><span class="ui__soft">Mobile · team lead</span></a></li>
+      <li><a href="#p-react" data-go="2"><span>ReAct agent</span><span class="ui__soft">Agents · JS</span></a></li>
+      <li><a href="#p-movies" data-go="3"><span>Movie recommender</span><span class="ui__soft">ML · API</span></a></li>
+      <li><a href="#p-osint" data-go="4"><span>OSINT</span><span class="ui__soft">Security</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="about" id="about" aria-labelledby="about-title">
+  <div class="about__col">
+    <img class="about__face" src="assets/avatar.jpg" width="600" height="600" alt="Portrait of Hassan Khan" loading="lazy" data-rise>
+    <h2 class="about__title" id="about-title" data-rise>A note from me</h2>
+    <div class="about__letter" data-rise-group>
+      <p>I'm a third-year computer science student at Farmingdale State College, with a 3.6 GPA and places on the President's List and the Dean's List. I learn by building, and I like owning the whole stack.</p>
+      <p>That means caring about how an agent decides what to do, where its data lives, how it gets billed and where it can break. Trimly taught me most of that, one webhook at a time.</p>
+      <p>Before software I spent my time on cybersecurity and digital forensics, and it still shapes how I build: I assume the input is hostile and check it before anything acts on it.</p>
+      <p>I'm the first in my family to go to college, so I've worked most of this out on my own. This fall I'm an AI Engineering Fellow at CodePath, and I'm a member of the Cybersecurity Club and the South Asian Student Association.</p>
+      <p>I'm looking for internships in software engineering, AI and ML, or security, ideally on a team that works on infrastructure, agents or applied ML. I'm always glad to talk about AI, security, or breaking into tech as a first-gen student.</p>
+    </div>
+    <p class="about__sign" data-rise>Hassan Khan<span>Deer Park, New York · English and Urdu</span></p>
+  </div>
+</section>
+
+<section class="stack" id="stack" aria-labelledby="stack-title">
+  <h2 class="stack__title" id="stack-title" data-rise>Tools and record</h2>
+  <div class="stack__cols">
+    <div class="stack__col" data-rise-group>
+      <h3>What I build with</h3>
+      <p class="group">Languages</p>
+      <ul class="rows">
+        <li><span>TypeScript</span><span>Trimly</span></li>
+        <li><span>JavaScript</span><span>ReAct agent</span></li>
+        <li><span>Python</span><span>Recommender, CodePath</span></li>
+        <li><span>Java</span><span>JavaFX coursework</span></li>
+        <li><span>SQL</span><span>Trimly, recommender</span></li>
+      </ul>
+      <p class="group">Web and backend</p>
+      <ul class="rows">
+        <li><span>React 19 and React Native</span><span>Trimly, SubTrak</span></li>
+        <li><span>Node.js</span><span>Trimly</span></li>
+        <li><span>Django REST Framework</span><span>SubTrak</span></li>
+        <li><span>Stripe, Socket.io, Capacitor</span><span>Trimly</span></li>
+      </ul>
+      <p class="group">AI and data</p>
+      <ul class="rows">
+        <li><span>Claude tool-use agents</span><span>Trimly</span></li>
+        <li><span>Zod-validated tool inputs</span><span>Trimly</span></li>
+        <li><span>Collaborative filtering</span><span>MovieLens</span></li>
+        <li><span>PostgreSQL and MongoDB</span><span>Trimly, SubTrak</span></li>
+      </ul>
+      <p class="group">Security and tools</p>
+      <ul class="rows">
+        <li><span>OSINT and digital forensics</span><span>Investigation</span></li>
+        <li><span>Git, GitHub, CI/CD</span><span>Daily</span></li>
+        <li><span>Linux CLI and Claude Code</span><span>Daily</span></li>
+      </ul>
+    </div>
+
+    <div class="stack__col" data-rise-group>
+      <h3>Where I've been</h3>
+      <figure class="stack__card">
+        <img src="assets/codepath-ai110.jpg" width="1600" height="900" alt="Hassan Khan's CodePath AI110 engineer card, dated 16 September 2026" loading="lazy">
+        <figcaption>Day one of CodePath AI110, 16 September 2026.</figcaption>
+      </figure>
+      <p class="group">Education</p>
+      <ul class="rows">
+        <li><span>B.S. Computer Science, Farmingdale State College</span><span>May 2028</span></li>
+        <li><span>GPA 3.6, President's List and Dean's List</span><span>2025–26</span></li>
+        <li><span>AI Engineering Fellow, CodePath AI110</span><span>Fall 2026</span></li>
+      </ul>
+      <p class="group">Certificates</p>
+      <ul class="rows">
+        <li><span><img class="rows__icon" src="assets/aws-cloud-101.png" width="16" height="16" alt="">AWS Educate: Cloud Computing 101</span><span>Sep 2026</span></li>
+        <li><span>LinkedIn Learning: GitHub</span><span>Sep 2026</span></li>
+        <li><span>Cisco: Data Science Essentials with Python</span><span>Aug 2026</span></li>
+      </ul>
+      <p class="group">Community</p>
+      <ul class="rows">
+        <li><span>Cybersecurity Club</span><span>Farmingdale</span></li>
+        <li><span>South Asian Student Association</span><span>Farmingdale</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <form class="contact__form" action="mailto:hassan.c.khan@outlook.com" method="get" enctype="text/plain">
+    <h2 class="contact__title" id="contact-title" data-rise><span>Hiring interns for 2027?</span> Tell me about the team.</h2>
+    <div class="field" data-rise>
+      <label class="sr" for="msg">Your message to Hassan</label>
+      <input id="msg" name="body" type="text" autocomplete="off" placeholder="We're building…" aria-describedby="msg-note">
+      <input type="hidden" name="subject" value="Internship conversation">
+      <button type="submit" class="field__go" aria-label="Write the email">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+    </div>
+    <p class="contact__note" id="msg-note">This opens your email app with your message addressed to me.</p>
+    <dl class="contact__rows" data-rise-group>
+      <div><dt>Email</dt><dd><a href="mailto:hassan.c.khan@outlook.com">hassan.c.khan@outlook.com</a></dd></div>
+      <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/hassan-khan-03a095386/">in/hassan-khan-03a095386</a></dd></div>
+      <div><dt>GitHub</dt><dd><a href="https://github.com/hassan47khan">github.com/hassan47khan</a></dd></div>
+    </dl>
+  </form>
+</section>
+</main>
+
+<footer class="foot">
+  <img class="foot__img" src="assets/long-island.jpg" width="1600" height="800" alt="Long Island seen from a Landsat satellite" loading="lazy">
+  <div class="foot__top">
+    <nav aria-label="Footer">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#stack">Stack</a>
+      <a href="#top">Back to top</a>
+    </nav>
+    <p>Deer Park, Long Island<br><a href="mailto:hassan.c.khan@outlook.com">hassan.c.khan@outlook.com</a></p>
+  </div>
+  <p class="foot__name" aria-hidden="true"><span class="wordmark" data-scale="in">Hassan Khan</span></p>
+  <p class="credits">© 2026 Hassan Khan. Pictures via Wikimedia Commons:
+    <a href="https://commons.wikimedia.org/w/index.php?curid=131249837">WAC telephone switchboard operators</a> by PhotosNormandie, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>;
+    <a href="https://commons.wikimedia.org/wiki/File:Natchez_Hotel_Barber_Shop.png">Natchez Hotel Barber Shop</a>, public domain;
+    <a href="https://commons.wikimedia.org/wiki/File:Pittsboro_Merchant_Business_Ledger_-_DPLA_-_4cbfce8f8f08c14f851ab74af046c082_(page_258).jpg">Pittsboro Merchant Business Ledger</a>, public domain;
+    <a href="https://commons.wikimedia.org/wiki/File:Card_puncher_-_NARA_-_513295.jpg">Woman with a Hollerith pantograph punch</a>, National Archives, public domain;
+    <a href="https://commons.wikimedia.org/wiki/File:The_Rialto_Theatre_building_in_Alamosa,_Colorado_LCCN2015632588.tif">The Rialto Theatre, Alamosa</a> by Carol M. Highsmith, public domain;
+    <a href="https://commons.wikimedia.org/wiki/File:Bertillon,_Alphonse,_fiche_anthropom%C3%A9trique_recto-verso.jpg">Bertillon identification card</a> by Jebulon, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>;
+    <a href="https://commons.wikimedia.org/wiki/File:Long_Island_Landsat_Mosaic.jpg">Long Island Landsat mosaic</a>, NASA, public domain.</p>
+</footer>
+
+<script src="main.js" defer></script>
+</body>
+</html>
