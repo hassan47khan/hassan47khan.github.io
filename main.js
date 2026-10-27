@@ -24,6 +24,9 @@
   const work = document.querySelector('.work');
   const projects = [...document.querySelectorAll('.project')];
   const links = [...document.querySelectorAll('.work__index a')];
+  /* Each index link drives the project its #anchor sits in, whatever the order. */
+  const target = (a) => projects.findIndex((p) => p.contains(document.querySelector(a.hash)));
+  work.style.setProperty('--projects', projects.length);
   const big = matchMedia('(min-width: 960px) and (min-height: 680px)');
   let current = -1;
 
@@ -34,7 +37,7 @@
       p.classList.toggle('is-on', k === i);
       p.toggleAttribute('inert', root.classList.contains('pinned') && k !== i);
     });
-    links.forEach((a, k) => a.setAttribute('aria-current', k === i ? 'true' : 'false'));
+    links.forEach((a) => a.setAttribute('aria-current', target(a) === i ? 'true' : 'false'));
     current = i;
   };
 
@@ -53,7 +56,8 @@
   links.forEach((a) => a.addEventListener('click', (e) => {
     if (!root.classList.contains('pinned')) return;
     e.preventDefault();
-    const i = Number(a.dataset.go);
+    const i = target(a);
+    if (i < 0) return;
     const top = work.getBoundingClientRect().top + scrollY + i * step() + 2;
     scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
   }));
@@ -150,8 +154,9 @@
 
   /* Trimly's ad: muted loop that plays only while it is on screen (and, pinned, while Trimly is the
      current project). Reduced motion: no autoplay, the button starts it. */
-  const video = document.querySelector('.video__media');
-  const toggle = document.querySelector('.video__toggle');
+  const host = document.querySelector('[data-video="trimly"]');
+  const video = host?.querySelector('.video__media');
+  const toggle = host?.querySelector('.video__toggle');
   if (video && toggle) {
     let inView = false;
     let userPaused = reduce;
@@ -161,7 +166,7 @@
       toggle.setAttribute('aria-pressed', playing ? 'false' : 'true');
     };
     const sync = () => {
-      const onStage = !root.classList.contains('pinned') || current === 0;
+      const onStage = !root.classList.contains('pinned') || projects[current] === host;
       if (inView && onStage && !userPaused) video.play().catch(() => {});
       else video.pause();
     };
