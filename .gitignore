@@ -1,1 +1,6 @@
 .taste-skill/
+node_modules/
+dist/
+.lighthouseci/
+test-results/
+playwright-report/

@@ -148,6 +148,8 @@ ul, ol { padding: 0; list-style: none; }
 .project__text p { max-width: 46ch; }
 .project__text p + p { margin-top: 14px; }
 .project__stack { color: var(--muted-on-navy); font-size: var(--step-small); font-weight: 500; }
+.project__status { font-size: var(--step-small); color: var(--muted-on-navy); }
+.badge { display: inline-block; margin-right: 8px; padding: 2px 8px; background: var(--gold); color: var(--navy-0); font-weight: 500; }
 .project__stack a:hover { color: var(--gold); }
 .project__figure { position: relative; }
 .project__figure > img {
@@ -237,7 +239,7 @@ ul, ol { padding: 0; list-style: none; }
    Every project's text shares the middle row, so the row is as tall as the longest one
    and nothing can run into the index. If it does not fit the screen, main.js turns the
    pinned mode off and the stacked layout is used instead. */
-.pinned .work { padding: 0; height: calc(100svh + 4 * 75svh); }
+.pinned .work { padding: 0; height: calc(100svh + (var(--projects, 3) - 1) * 75svh); }
 .pinned .work__pin {
   position: sticky; top: 0;
   height: 100svh;
@@ -316,7 +318,7 @@ ul, ol { padding: 0; list-style: none; }
 
 /* ---------- Contact: on slate ---------- */
 .contact { background: var(--slate); color: var(--cream); padding: clamp(96px, 16svh, 180px) var(--m) clamp(96px, 16svh, 160px); }
-.contact__form { max-width: 720px; margin: 0 auto; }
+.contact__inner { max-width: 720px; margin: 0 auto; }
 .contact__title { font-size: var(--step-display); color: var(--gold); }
 .contact__prompt { margin-top: 32px; font-size: var(--step-lead); font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; }
 .contact__prompt span { color: var(--gold); }
@@ -342,6 +344,8 @@ ul, ol { padding: 0; list-style: none; }
 .field__go:hover { transform: translateX(3px); }
 .field__go:active { transform: scale(.92); }
 .contact__note { margin-top: 16px; font-size: var(--step-small); }
+.contact__error { margin-top: 12px; padding: 8px 12px; background: var(--navy-0); color: var(--gold); font-size: var(--step-small); font-weight: 500; }
+.contact__error[hidden] { display: none; }
 .contact__rows { margin-top: 64px; display: grid; gap: 6px; }
 .contact__rows div { display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: center; min-height: 44px; }
 .contact__rows dd a { font-weight: 500; }
@@ -360,8 +364,7 @@ ul, ol { padding: 0; list-style: none; }
 .foot__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) sepia(.35) brightness(.5); }
 .foot > *:not(.foot__img) { position: relative; }
 .foot__top { display: flex; justify-content: space-between; gap: 32px; }
-.foot__top nav { display: flex; gap: 8px 24px; flex-wrap: wrap; }
-.foot__top nav a { padding: 10px 0; }
+.foot__links a { display: inline-block; padding: 10px 0; }
 .foot__top a:hover { color: var(--gold); }
 .foot__top p { text-align: right; }
 .foot__name { margin-top: auto; font-size: clamp(4rem, 26.5vw, 32rem); line-height: 0.86; color: var(--gold); }
