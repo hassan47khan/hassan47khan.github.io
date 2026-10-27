@@ -148,6 +148,36 @@
 
   chips.forEach((c, k) => c.addEventListener('click', () => play(k)));
 
+  /* Trimly's ad: muted loop that plays only while it is on screen (and, pinned, while Trimly is the
+     current project). Reduced motion: no autoplay, the button starts it. */
+  const video = document.querySelector('.video__media');
+  const toggle = document.querySelector('.video__toggle');
+  if (video && toggle) {
+    let inView = false;
+    let userPaused = reduce;
+    const label = () => {
+      const playing = !video.paused;
+      toggle.textContent = playing ? 'Pause ad' : 'Play ad';
+      toggle.setAttribute('aria-pressed', playing ? 'false' : 'true');
+    };
+    const sync = () => {
+      const onStage = !root.classList.contains('pinned') || current === 0;
+      if (inView && onStage && !userPaused) video.play().catch(() => {});
+      else video.pause();
+    };
+    video.addEventListener('play', label);
+    video.addEventListener('pause', label);
+    toggle.addEventListener('click', () => {
+      userPaused = !video.paused;
+      if (userPaused) video.pause(); else video.play().catch(() => {});
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((e) => { inView = e.some((x) => x.isIntersecting); sync(); }, { threshold: 0.35 }).observe(video);
+    }
+    addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+    label();
+  }
+
   /* Contact: open an email with the visitor's own words. */
   const form = document.querySelector('.contact__form');
   form?.addEventListener('submit', (e) => {

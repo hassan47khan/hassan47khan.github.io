@@ -166,6 +166,23 @@ ul, ol { padding: 0; list-style: none; }
 }
 .work__index { display: none; }
 
+/* Trimly's own product ad in place of a photograph */
+.video { position: relative; background: #211a14; }
+.video__media { display: block; width: 100%; height: auto; aspect-ratio: 1280 / 710; object-fit: cover; }
+.video__toggle {
+  position: absolute; right: 12px; top: 12px;
+  min-height: 44px; padding: 0 16px;
+  font: 500 14px/1 var(--text);
+  background: var(--navy-0); color: var(--gold);
+  border: 0; cursor: pointer;
+  transition: background-color .2s ease, transform .2s var(--ease-out);
+}
+.video__toggle:hover { background: var(--navy); }
+.video__toggle:active { transform: scale(.95); }
+.project__figure--video .ui { margin: 16px 0 0; }
+.pinned .project__figure--video { background: var(--navy-0); padding: 40px; }
+.pinned .project__figure--video .ui { left: 40px; bottom: 40px; width: min(440px, calc(100% - 80px)); }
+
 /* interface fragments (data-ui): the products' own panels keep their own lines */
 .ui {
   background: var(--cream);
@@ -390,6 +407,9 @@ ul, ol { padding: 0; list-style: none; }
   .foot__top { flex-direction: column; gap: 16px; }
   .foot__top p { text-align: left; }
 }
+
+/* The ad is never covered: outside the pinned stage its demo panel sits below it */
+html:not(.pinned) .project__figure--video .ui { margin: 16px 0 0; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

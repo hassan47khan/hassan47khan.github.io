@@ -58,8 +58,14 @@
         <p class="project__how">I shipped Claude tool-use agents with Zod-validated inputs, webhook idempotency guards so a retried webhook never books twice, Stripe billing and real-time Socket.io streaming, all wrapped as a native app with Capacitor.</p>
         <p class="project__stack">React 19 · TypeScript · Node.js · PostgreSQL · Claude API · Currently on hold</p>
       </div>
-      <figure class="project__figure">
-        <img src="assets/barbershop.jpg" width="1600" height="1262" alt="Interior of the Natchez Hotel barber shop around 1900: chairs, mirrors and barbers at work">
+      <figure class="project__figure project__figure--video">
+        <div class="video">
+          <video class="video__media" muted loop playsinline preload="none" poster="assets/trimly-ad.jpg" width="1280" height="710"
+            aria-label="Trimly's 37-second product ad: the AI concierge answers a call, books Maya Chen for a cut and finish at 2:30, and the front desk shows the deposit collected and a reminder scheduled.">
+            <source src="assets/trimly-ad.webm" type="video/webm">
+          </video>
+          <button type="button" class="video__toggle" aria-pressed="false">Pause ad</button>
+        </div>
         <div class="ui ui--agent" data-ui>
           <div class="ui__bar">
             <span>Trimly agent</span>
@@ -300,7 +306,6 @@
   <p class="foot__name" aria-hidden="true"><span class="wordmark" data-scale="in">Hassan Khan</span></p>
   <p class="credits">© 2026 Hassan Khan. Pictures via Wikimedia Commons:
     <a href="https://commons.wikimedia.org/w/index.php?curid=131249837">WAC telephone switchboard operators</a> by PhotosNormandie, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>;
-    <a href="https://commons.wikimedia.org/wiki/File:Natchez_Hotel_Barber_Shop.png">Natchez Hotel Barber Shop</a>, public domain;
     <a href="https://commons.wikimedia.org/wiki/File:Pittsboro_Merchant_Business_Ledger_-_DPLA_-_4cbfce8f8f08c14f851ab74af046c082_(page_258).jpg">Pittsboro Merchant Business Ledger</a>, public domain;
     <a href="https://commons.wikimedia.org/wiki/File:Card_puncher_-_NARA_-_513295.jpg">Woman with a Hollerith pantograph punch</a>, National Archives, public domain;
     <a href="https://commons.wikimedia.org/wiki/File:The_Rialto_Theatre_building_in_Alamosa,_Colorado_LCCN2015632588.tif">The Rialto Theatre, Alamosa</a> by Carol M. Highsmith, public domain;
