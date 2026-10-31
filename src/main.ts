@@ -15,11 +15,6 @@ function findAll<T extends Element>(selector: string, type: Ctor<T>, scope: Pare
 const root = document.documentElement;
 root.classList.add('js');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const isPinned = () => root.classList.contains('pinned');
-
-/* Shared with Trimly's ad: which project is on the pinned stage. */
-let projects: HTMLElement[] = [];
-let current = -1;
 
 /* Entrances: each section's parts arrive in reading order, once. */
 function setupReveals(): void {
@@ -44,87 +39,20 @@ function setupReveals(): void {
   }
 }
 
-/* Work: a pinned stage on large screens, one screen of scroll per project.
-   Returns the scroll handler for the stage, or null when the section is missing. */
-function setupWork(): (() => void) | null {
-  const work = find('.work', HTMLElement);
-  const pin = find('.work__pin', HTMLElement);
-  if (!work || !pin) return null;
-
-  projects = findAll('.project', HTMLElement, work);
-  const links = findAll('.work__index a', HTMLAnchorElement, work);
-  const big = matchMedia('(min-width: 960px) and (min-height: 680px)');
-  const step = () => innerHeight * 0.75;
-  work.style.setProperty('--projects', String(projects.length));
-
-  /* Each index link drives the project its #anchor sits in, whatever the order. */
-  const target = (a: HTMLAnchorElement): number => {
-    const anchor = a.hash ? document.getElementById(decodeURIComponent(a.hash.slice(1))) : null;
-    return anchor ? projects.findIndex((p) => p.contains(anchor)) : -1;
-  };
-
-  const show = (i: number): void => {
-    if (i === current) return;
-    projects.forEach((p, k) => {
-      p.classList.toggle('was-on', k === current && k !== i);
-      p.classList.toggle('is-on', k === i);
-      p.toggleAttribute('inert', isPinned() && k !== i);
+/* Nav: mark the section the reader is in. */
+function setupNav(): void {
+  const links = findAll('.nav a[href^="#"]', HTMLAnchorElement);
+  const sections = links
+    .map((a) => document.getElementById(a.hash.slice(1)))
+    .filter((s): s is HTMLElement => s !== null);
+  if (!sections.length || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      links.forEach((a) => a.setAttribute('aria-current', a.hash === `#${e.target.id}` ? 'true' : 'false'));
     });
-    links.forEach((a) => a.setAttribute('aria-current', target(a) === i ? 'true' : 'false'));
-    current = i;
-  };
-
-  const onStageScroll = (): void => {
-    if (!isPinned()) return;
-    const r = work.getBoundingClientRect();
-    show(Math.min(projects.length - 1, Math.max(0, Math.floor((-r.top + step() * 0.4) / step()))));
-  };
-
-  /* Pinned only when the whole left column fits the screen; otherwise stack. */
-  const setMode = (): void => {
-    root.classList.toggle('pinned', big.matches);
-    if (big.matches && pin.scrollHeight > pin.clientHeight + 1) root.classList.remove('pinned');
-    current = -1;
-    if (isPinned()) { show(0); onStageScroll(); }
-    else projects.forEach((p) => { p.classList.remove('is-on', 'was-on'); p.removeAttribute('inert'); });
-  };
-
-  links.forEach((a) => a.addEventListener('click', (e) => {
-    if (!isPinned()) return;
-    const i = target(a);
-    if (i < 0) return;
-    e.preventDefault();
-    const top = work.getBoundingClientRect().top + scrollY + i * step() + 2;
-    scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
-  }));
-
-  let resizeTimer: number | undefined;
-  big.addEventListener('change', setMode);
-  addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(setMode, 150);
-  });
-  setMode();
-  if (document.fonts) void document.fonts.ready.then(setMode);
-  return onStageScroll;
-}
-
-/* The wordmarks give a little under the scroll. */
-const outMark = find('[data-scale="out"]', HTMLElement);
-const inMark = find('[data-scale="in"]', HTMLElement);
-const foot = find('.foot', HTMLElement);
-let onStageScroll: (() => void) | null = null;
-
-function onScroll(): void {
-  onStageScroll?.();
-  if (reduce) return;
-  const vh = innerHeight;
-  const p = Math.min(1, Math.max(0, scrollY / vh));
-  if (outMark) outMark.style.transform = `scale(${1 - 0.07 * p})`;
-  if (inMark && foot) {
-    const q = Math.min(1, Math.max(0, 1 - foot.getBoundingClientRect().top / vh));
-    inMark.style.transform = `scale(${0.93 + 0.07 * q})`;
-  }
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach((s) => io.observe(s));
 }
 
 /* Trimly: replay a client message and the tool calls the agent makes to answer it. */
@@ -216,38 +144,29 @@ function setupReplay(): void {
   chips.forEach((c) => c.addEventListener('click', () => play(Number(c.dataset.scenario))));
 }
 
-/* Trimly's ad: muted loop that plays only while it is on screen (and, pinned, while Trimly is the
-   current project). Reduced motion: no autoplay, the button starts it. */
+/* Trimly's ad: waits for a press, so the page never pulls the video unasked, and pauses off screen. */
 function setupVideo(): void {
   const host = find('[data-video="trimly"]', HTMLElement);
   if (!host) return;
   const video = find('.video__media', HTMLVideoElement, host);
   const toggle = find('.video__toggle', HTMLButtonElement, host);
-  if (!video || !toggle) return;
+  const label = toggle && find('span', HTMLSpanElement, toggle);
+  if (!video || !toggle || !label) return;
 
-  let inView = false;
-  let userPaused = reduce;
-  const label = (): void => {
-    const playing = !video.paused;
-    toggle.textContent = playing ? 'Pause ad' : 'Play ad';
-    toggle.setAttribute('aria-pressed', playing ? 'false' : 'true');
-  };
   const sync = (): void => {
-    const onStage = !isPinned() || projects[current] === host;
-    if (inView && onStage && !userPaused) video.play().catch(() => {});
-    else video.pause();
+    const playing = !video.paused;
+    label.textContent = playing ? 'Pause ad' : 'Play ad';
+    toggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
   };
-  video.addEventListener('play', label);
-  video.addEventListener('pause', label);
+  video.addEventListener('play', sync);
+  video.addEventListener('pause', sync);
   toggle.addEventListener('click', () => {
-    userPaused = !video.paused;
-    if (userPaused) video.pause(); else video.play().catch(() => {});
+    if (video.paused) video.play().catch(() => {}); else video.pause();
   });
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver((e) => { inView = e.some((x) => x.isIntersecting); sync(); }, { threshold: 0.35 }).observe(video);
+    new IntersectionObserver((e) => { if (!e.some((x) => x.isIntersecting)) video.pause(); }, { threshold: 0.1 }).observe(video);
   }
-  addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
-  label();
+  sync();
 }
 
 /* Email: the address is put together here so it never sits in the page source as one string.
@@ -300,14 +219,8 @@ function setupContact(): void {
 }
 
 setupReveals();
-onStageScroll = setupWork();
+setupNav();
 setupEmailLinks();
 setupReplay();
 setupVideo();
 setupContact();
-
-let ticking = false;
-addEventListener('scroll', () => {
-  if (!ticking) { requestAnimationFrame(() => { onScroll(); ticking = false; }); ticking = true; }
-}, { passive: true });
-onScroll();
